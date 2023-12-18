@@ -1,10 +1,10 @@
-package com.felipe.springboot.server;
+package com.server.server;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringBootCourseApplicationTests {
+class StartupTests {
 
 	@Test
 	void contextLoads() {
