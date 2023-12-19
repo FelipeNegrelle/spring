@@ -1,4 +1,4 @@
-package com.server.server.api;
+package com.server.server.api.model;
 
 public class Hello {
 

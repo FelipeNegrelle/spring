@@ -1,5 +1,6 @@
-package com.server.server.api;
+package com.server.server.api.controllers;
 
+import com.server.server.api.model.Hello;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestParam;

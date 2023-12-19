@@ -1,4 +1,4 @@
-package com.server.server.api;
+package com.server.server.api.controllers;
 
 import com.server.server.api.exceptions.UnsupportedMathOperationException;
 import org.springframework.web.bind.annotation.*;
@@ -41,5 +41,4 @@ public class CalcController {
 
         return sqrt(num1);
     }
-
 }
