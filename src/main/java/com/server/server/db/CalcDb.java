@@ -1,6 +1,6 @@
 package com.server.server.db;
 
-import com.server.server.api.exceptions.UnsupportedMathOperationException;
+import com.server.server.api.exceptions.ResourceNotFoundException;
 
 import static com.server.server.utils.Numeric.convertToDouble;
 
@@ -12,7 +12,7 @@ public class CalcDb {
 
             return n1 + n2;
         } catch (NumberFormatException e) {
-            throw new UnsupportedMathOperationException("Please set a numeric value!");
+            throw new ResourceNotFoundException("Please set a numeric value!");
         }
     }
 
@@ -23,7 +23,7 @@ public class CalcDb {
 
             return n1 - n2;
         } catch (NumberFormatException e) {
-            throw new UnsupportedMathOperationException("Please set a numeric value!");
+            throw new ResourceNotFoundException("Please set a numeric value!");
         }
     }
 
@@ -34,7 +34,7 @@ public class CalcDb {
 
             return n1 * n2;
         } catch (NumberFormatException e) {
-            throw new UnsupportedMathOperationException("Please set a numeric value!");
+            throw new ResourceNotFoundException("Please set a numeric value!");
         }
     }
 
@@ -43,11 +43,11 @@ public class CalcDb {
             final double n1 = convertToDouble(num1);
             final double n2 = convertToDouble(num2);
 
-            if (n2 == 0) throw new UnsupportedMathOperationException("You cannot divide by 0");
+            if (n2 == 0) throw new ResourceNotFoundException("You cannot divide by 0");
 
             return n1 / n2;
         } catch (NumberFormatException e) {
-            throw new UnsupportedMathOperationException("Please set a numeric value!");
+            throw new ResourceNotFoundException("Please set a numeric value!");
         }
     }
 
@@ -58,7 +58,7 @@ public class CalcDb {
 
             return (n1 + n2) / 2;
         } catch (NumberFormatException e) {
-            throw new UnsupportedMathOperationException("Please set a numeric value!");
+            throw new ResourceNotFoundException("Please set a numeric value!");
         }
     }
 
@@ -68,7 +68,7 @@ public class CalcDb {
 
             return Math.sqrt(n1);
         } catch (NumberFormatException e) {
-            throw new UnsupportedMathOperationException("Please set a numeric value!");
+            throw new ResourceNotFoundException("Please set a numeric value!");
         }
     }
 }

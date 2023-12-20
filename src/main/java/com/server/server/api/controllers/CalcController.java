@@ -1,6 +1,6 @@
 package com.server.server.api.controllers;
 
-import com.server.server.api.exceptions.UnsupportedMathOperationException;
+import com.server.server.api.exceptions.ResourceNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import static com.server.server.utils.Numeric.*;
@@ -15,7 +15,7 @@ public class CalcController {
             @PathVariable(value = "num2") String num2
     ) {
         if (!isNumeric(num1) || !isNumeric(num2)) {
-            throw new UnsupportedMathOperationException("Please set a numeric value!");
+            throw new ResourceNotFoundException("Please set a numeric value!");
         }
 
         return switch (operation) {
@@ -29,14 +29,14 @@ public class CalcController {
 
             case "mean" -> mean(num1, num2);
 
-            default -> throw new UnsupportedMathOperationException("Please set a valid operation!");
+            default -> throw new ResourceNotFoundException("Please set a valid operation!");
         };
     }
 
     @RequestMapping(value = "calc/sqrt/{num1}", method = RequestMethod.GET)
     public double operation(@PathVariable(value = "num1") String num1) {
         if (!isNumeric(num1)) {
-            throw new UnsupportedMathOperationException("Please set a numeric value!");
+            throw new ResourceNotFoundException("Please set a numeric value!");
         }
 
         return sqrt(num1);
