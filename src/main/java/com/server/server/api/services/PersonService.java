@@ -1,12 +1,13 @@
 package com.server.server.api.services;
 
+import com.server.server.api.data.vo.v1.PersonVO;
 import com.server.server.api.exceptions.ResourceNotFoundException;
+import com.server.server.api.mapper.Mapper;
 import com.server.server.api.model.Person;
 import com.server.server.api.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.logging.Logger;
@@ -15,48 +16,50 @@ import java.util.logging.Logger;
 public class PersonService {
     private final AtomicLong counter = new AtomicLong();
 
-    private Logger logger = Logger.getLogger(PersonService.class.getName());
+    private final Logger logger = Logger.getLogger(PersonService.class.getName());
 
     @Autowired
     PersonRepository personRepository;
 
-    public List<Person> findAll() {
+    public List<PersonVO> findAll() {
         logger.info("findAll");
 
-        return personRepository.findAll();
+        return Mapper.parseListObjects(personRepository.findAll(), PersonVO.class);
     }
 
-    public Person findById(long id) {
+    public PersonVO findById(long id) {
         logger.info("findById: " + id);
 
-        return personRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Person not found for this id: " + id));
+        final Person person = personRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Person not found for this id: " + id));
+
+        return Mapper.parseObject(person, PersonVO.class);
     }
 
-    public Person create(Person person) {
+    public PersonVO create(PersonVO person) {
         logger.info("create: " + person.getFirstName());
 
-        return personRepository.save(person);
+        final Person personEntity = Mapper.parseObject(person, Person.class);
+
+        return Mapper.parseObject(personRepository.save(personEntity), PersonVO.class);
     }
 
-    public Person update(Person person) {
+    public PersonVO update(PersonVO person) {
         logger.info("update: " + person.getFirstName());
 
-        Person entity = personRepository.findById(person.getId())
-                .orElseThrow(() -> new ResourceNotFoundException("Person not found for this id: " + person.getId()));
-        entity.setFirstName(person.getFirstName());
-        entity.setLastName(person.getLastName());
-        entity.setAddress(person.getAddress());
-        entity.setGender(person.getGender());
+        final Person personEntity = personRepository.findById(person.getId()).orElseThrow(() -> new ResourceNotFoundException("Person not found for this id: " + person.getId()));
 
-        return personRepository.save(entity);
+        personEntity.setFirstName(person.getFirstName());
+        personEntity.setLastName(person.getLastName());
+        personEntity.setAddress(person.getAddress());
+        personEntity.setGender(person.getGender());
+
+        return Mapper.parseObject(personRepository.save(personEntity), PersonVO.class);
     }
 
     public void delete(long id) {
         logger.info("delete: " + id);
 
-        Person entity = personRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Person not found for this id: " + id));
+        final Person entity = personRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Person not found for this id: " + id));
 
         personRepository.delete(entity);
     }

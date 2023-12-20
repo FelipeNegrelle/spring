@@ -1,33 +1,13 @@
-package com.server.server.api.model;
+package com.server.server.api.data.vo.v1;
 
-import jakarta.persistence.*;
-
-import java.io.Serial;
-import java.io.Serializable;
-
-@Entity
-@Table(name = "person")
-public class Person implements Serializable {
-    @Serial
-    private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class PersonVO {
     private Long id;
-
-    @Column(name = "first_name", nullable = false, length = 50)
     private String firstName;
-
-    @Column(name = "last_name", length = 50)
     private String lastName;
-
-    @Column(length = 100)
     private String address;
-
-    @Column(length = 6)
     private String gender;
 
-    public Person() {
+    public PersonVO() {
     }
 
     public Long getId() {
@@ -92,7 +72,7 @@ public class Person implements Serializable {
 
         if (getClass() != obj.getClass()) return false;
 
-        Person other = (Person) obj;
+        PersonVO other = (PersonVO) obj;
 
         if (id != other.id) return false;
 
