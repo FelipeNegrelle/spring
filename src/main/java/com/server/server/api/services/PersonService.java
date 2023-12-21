@@ -1,12 +1,15 @@
 package com.server.server.api.services;
 
 import com.server.server.api.data.vo.v1.PersonVO;
+import com.server.server.api.data.vo.v2.PersonVOV2;
 import com.server.server.api.exceptions.ResourceNotFoundException;
 import com.server.server.api.mapper.Mapper;
+import com.server.server.api.mapper.custom.PersonMapper;
 import com.server.server.api.model.Person;
 import com.server.server.api.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
@@ -20,6 +23,9 @@ public class PersonService {
 
     @Autowired
     PersonRepository personRepository;
+
+    @Autowired
+    PersonMapper personMapper;
 
     public List<PersonVO> findAll() {
         logger.info("findAll");
@@ -41,6 +47,14 @@ public class PersonService {
         final Person personEntity = Mapper.parseObject(person, Person.class);
 
         return Mapper.parseObject(personRepository.save(personEntity), PersonVO.class);
+    }
+
+    public PersonVOV2 createV2(PersonVOV2 person) {
+        logger.info("create: " + person.getFirstName());
+
+        final Person personEntity = personMapper.convertPersonVOV2ToPerson(person);
+
+        return personMapper.convertEntityToVOV2(personRepository.save(personEntity));
     }
 
     public PersonVO update(PersonVO person) {
