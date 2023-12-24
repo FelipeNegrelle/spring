@@ -23,7 +23,7 @@ public class MapperConverterTest {
     @Test
     public void parseEntityToVOTest() {
         final PersonVO output = Mapper.parseObject(inputObject.mockEntity(), PersonVO.class);
-        assertEquals(Long.valueOf(0L), output.getId());
+        assertEquals(Long.valueOf(0L), output.getUniqueKey());
         assertEquals("First Name Test0", output.getFirstName());
         assertEquals("Last Name Test0", output.getLastName());
         assertEquals("Addres Test0", output.getAddress());
@@ -36,7 +36,7 @@ public class MapperConverterTest {
 
         final PersonVO outputZero = outputList.get(0);
 
-        assertEquals(Long.valueOf(0L), outputZero.getId());
+        assertEquals(Long.valueOf(0L), outputZero.getUniqueKey());
         assertEquals("First Name Test0", outputZero.getFirstName());
         assertEquals("Last Name Test0", outputZero.getLastName());
         assertEquals("Addres Test0", outputZero.getAddress());
@@ -44,7 +44,7 @@ public class MapperConverterTest {
 
         final PersonVO outputSeven = outputList.get(7);
 
-        assertEquals(Long.valueOf(7L), outputSeven.getId());
+        assertEquals(Long.valueOf(7L), outputSeven.getUniqueKey());
         assertEquals("First Name Test7", outputSeven.getFirstName());
         assertEquals("Last Name Test7", outputSeven.getLastName());
         assertEquals("Addres Test7", outputSeven.getAddress());
@@ -52,7 +52,7 @@ public class MapperConverterTest {
 
         final PersonVO outputTwelve = outputList.get(12);
 
-        assertEquals(Long.valueOf(12L), outputTwelve.getId());
+        assertEquals(Long.valueOf(12L), outputTwelve.getUniqueKey());
         assertEquals("First Name Test12", outputTwelve.getFirstName());
         assertEquals("Last Name Test12", outputTwelve.getLastName());
         assertEquals("Addres Test12", outputTwelve.getAddress());

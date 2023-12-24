@@ -1,7 +1,20 @@
 package com.server.server.api.data.vo.v1;
 
-public class PersonVO {
-    private Long id;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import org.springframework.hateoas.RepresentationModel;
+import org.springframework.web.bind.annotation.Mapping;
+
+import java.io.Serial;
+import java.io.Serializable;
+
+@JsonPropertyOrder({"uniqueKey", "firstName", "lastName", "address", "gender"})
+public class PersonVO extends RepresentationModel<PersonVO> implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
+
+    @JsonProperty("id")
+    private Long uniqueKey;
     private String firstName;
     private String lastName;
     private String address;
@@ -10,12 +23,12 @@ public class PersonVO {
     public PersonVO() {
     }
 
-    public Long getId() {
-        return id;
+    public Long getUniqueKey() {
+        return uniqueKey;
     }
 
-    public void setId(Long value) {
-        this.id = value;
+    public void setUniqueKey(Long value) {
+        this.uniqueKey = value;
     }
 
     public String getFirstName() {
@@ -59,7 +72,7 @@ public class PersonVO {
         result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
         result = prime * result + ((address == null) ? 0 : address.hashCode());
         result = prime * result + ((gender == null) ? 0 : gender.hashCode());
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        result = prime * result + ((uniqueKey == null) ? 0 : uniqueKey.hashCode());
 
         return result;
     }
@@ -74,7 +87,7 @@ public class PersonVO {
 
         PersonVO other = (PersonVO) obj;
 
-        if (id != other.id) return false;
+        if (uniqueKey != other.uniqueKey) return false;
 
         if (firstName == null) {
             if (other.firstName != null) return false;
@@ -92,9 +105,9 @@ public class PersonVO {
             if (other.address != null) return false;
         } else if (!address.equals(other.address)) return false;
 
-        if (id == null) {
-            if (other.id != null) return false;
-        } else if (!id.equals(other.id)) return false;
+        if (uniqueKey == null) {
+            if (other.uniqueKey != null) return false;
+        } else if (!uniqueKey.equals(other.uniqueKey)) return false;
 
         return true;
     }
