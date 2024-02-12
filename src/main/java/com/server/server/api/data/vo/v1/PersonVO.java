@@ -3,7 +3,6 @@ package com.server.server.api.data.vo.v1;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import org.springframework.hateoas.RepresentationModel;
-import org.springframework.web.bind.annotation.Mapping;
 
 import java.io.Serial;
 import java.io.Serializable;

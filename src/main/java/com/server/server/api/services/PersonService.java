@@ -81,7 +81,7 @@ public class PersonService {
     }
 
     public PersonVO update(PersonVO person) throws Exception {
-        if (!Objects.nonNull(person)) {
+        if (Objects.nonNull(person)) {
             logger.info("update: " + person.getFirstName());
 
             final Person personEntity = personRepository.findById(person.getUniqueKey()).orElseThrow(() -> new ResourceNotFoundException("Person not found for this id: " + person.getUniqueKey()));
